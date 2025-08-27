@@ -231,6 +231,11 @@ class ActionHandler {
         window.VSC.logger.info(`Cross-toggle from ${target} to ${crossTarget}`);
         video.vsc.speedBeforeReset = currentSpeed;
         this.adjustSpeed(video, crossTarget);
+      } else {
+        // Already at target and nothing remembered - set to fast binding value
+        const fastBindingValue = this.config.getKeyBinding('fast');
+        window.VSC.logger.info(`Already at reset speed ${target}, set to fast binding value ${fastBindingValue}`);
+        this.adjustSpeed(video, fastBindingValue);
       }
     } else {
       // Remember current speed and jump to target
